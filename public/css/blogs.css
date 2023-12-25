@@ -1,0 +1,35 @@
+* {
+    color: grey;
+}
+
+h4 {
+    color: rgb(189, 189, 189);
+}
+
+h6 {
+    color: white;
+}
+
+hr {
+    border-color: grey;
+}
+
+.blog img {
+    position: relative;
+}
+
+p {
+    font-size: 18px;
+}
+
+ul {
+    padding-left: 0;
+}
+
+pre, code {
+    color: white;
+}
+
+mark {
+    background: black;
+}

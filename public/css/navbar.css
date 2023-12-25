@@ -1,0 +1,14 @@
+.navbar-custom {
+    background: black;
+}
+
+.nav-item a, .navbar-brand {
+    color: white;
+}
+
+span a{
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+    margin-right: 10px;
+}
