@@ -22,8 +22,12 @@ p {
     font-size: 18px;
 }
 
-ul {
+ul, ol {
     padding-left: 0;
+}
+
+ol li {
+    font-size: 18px;
 }
 
 pre, code {

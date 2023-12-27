@@ -93,6 +93,10 @@ app.get("/:slug", (req, res) => {
     res.render("partials/resume", {
       style: 'blogs.css'
     });
+  } else if (slug === "best-data-science-youtuber") {
+    res.render("partials/bestdsyt", {
+      style: 'blogs.css'
+    });
   } else {
     res.status(404).send("Blog not found");
   }
