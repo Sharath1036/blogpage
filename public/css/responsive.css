@@ -28,6 +28,9 @@
         text-align: center;
     }
 
+    .blogimg {
+        height: 300px;
+    }
 }
 
 /* Media Query for Tablets Ipads portrait mode, Mobiles on Desktop Site mode */
@@ -93,5 +96,10 @@
 
     .links {
         text-align: right;
+    }
+
+    .blogimg{
+        height: 600px;
+        object-position: cover;
     }
 }

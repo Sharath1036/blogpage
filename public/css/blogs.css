@@ -37,3 +37,8 @@ pre, code {
 mark {
     background: black;
 }
+
+.blogimg {
+    height: 500px;
+    object-fit: cover;
+}
