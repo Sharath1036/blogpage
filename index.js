@@ -97,6 +97,10 @@ app.get("/:slug", (req, res) => {
     res.render("partials/bestdsyt", {
       style: 'blogs.css'
     });
+  } else if (slug === "wish-i-had-this-college-life") {
+    res.render("partials/wishIHad", {
+      style: 'blogs.css'
+    });
   } else {
     res.status(404).send("Blog not found");
   }
@@ -104,5 +108,5 @@ app.get("/:slug", (req, res) => {
 
 app.listen(8080, () =>{
   console.log("Server running on port http://localhost:8080");
-  console.log("Server running on your network http://192.168.1.3:8080");
+  console.log("Server running on your network http://192.168.1.4:8080");
 });
