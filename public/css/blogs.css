@@ -2,7 +2,7 @@
     color: grey;
 }
 
-h4 {
+h4, .h5 {
     color: rgb(189, 189, 189);
 }
 
@@ -16,6 +16,7 @@ hr {
 
 .blog img {
     position: relative;
+    
 }
 
 p {

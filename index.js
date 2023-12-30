@@ -101,6 +101,14 @@ app.get("/:slug", (req, res) => {
     res.render("partials/wishIHad", {
       style: 'blogs.css'
     });
+  } else if (slug === "first-stadium-game-experience") {
+    res.render("partials/firststadium", {
+      style: 'blogs.css'
+    });
+  } else if (slug === "deleting-past-github-commits") {
+    res.render("partials/deletecommits", {
+      style: 'blogs.css'
+    });
   } else {
     res.status(404).send("Blog not found");
   }
