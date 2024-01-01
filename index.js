@@ -109,6 +109,10 @@ app.get("/:slug", (req, res) => {
     res.render("partials/deletecommits", {
       style: 'blogs.css'
     });
+  } else if (slug === "2023-unwrapped") {
+    res.render("partials/2023unwrapped", {
+      style: 'blogs.css'
+    });
   } else {
     res.status(404).send("Blog not found");
   }
