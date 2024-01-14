@@ -113,6 +113,10 @@ app.get("/:slug", (req, res) => {
     res.render("partials/2023unwrapped", {
       style: 'blogs.css'
     });
+  } else if (slug === "internship-scam") {
+    res.render("partials/internshipscam", {
+      style: 'blogs.css'
+    });
   } else {
     res.status(404).send("Blog not found");
   }
