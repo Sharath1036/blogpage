@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="h6 pt-3"><a href="/cs" class="font-weight-normal">COMPUTER SCIENCE</a></div>
+    <div class="h1 text-white" style="display:inline-block;">Journey into Django</div>
+    <br><br>
+    <hr>
+    <div class="card bg-transparent border-0">
+        <div class="d-flex flex-row card-body">
+            <div class="blog">
+                <img class="rounded-circle" src="sharath.png" height="50" width="50">
+            </div>
+            <div class="pl-3 position-relative">
+                <h6>SHARATH PAI</h6>
+                <h6 class="text-muted font-weight-normal">11 FEB 2024 · 5 MIN READ</h6>
+            </div>
+        </div>
+    </div>
+    <br>
+    <img class="card-img-top mx-auto d-block blogimg" src="django.webp" alt="image" />
+    <br><br>
+    <div class="container">
+        <p>I previously wanted to get into MERN Stack Development, but since transitioning into the field of AI, I have started working with Django frequently and found the learning curve quite interesting. Django is a backend development framework written in Python. Here are the key things that I learned and implemented in Django.</p>
+
+        <h4>1. Basics</h4>
+        <p>While working with ReactJS, we needed to create only the project directory. But in Django, we need to create the project as well as the app directories. The project directory contains all the main setups that you require for your apps. The advantage of using Django is that you can create multiple apps in one single project.</p>
+
+        <h4>2. MVT Architecture</h4>
+        <p>Many of us might have heard of MVC architecture while learning NodeJS. MVT architecture works quite similarly. MVT stands for Model View Template. A model is very similar to creating tables for a form in a database. It controls the validation of the fields inside a table. Views are the heart of a Django project. It handles all the requests as well as the logic for each table. Templates are the front-end part where you use HTML, CSS, and JS to design your web application.</p>
+
+        <h4>3. URL and Slug Creation</h4>
+        <p>The most important part of a backend website is the URL. The creation of URLs is relatively easy, as you need to define your URLs in the urls.py file and write the redirection logic inside the views. Additionally, we can pass sub-routes called slugs by passing keyword arguments into the requests function. This will create a sub-route of a route.</p>
+
+        <h4>4. Template Inheritance and Context</h4>
+        <p>While building a website using traditional HTML, CSS, and JS, for each page we had to write the boilerplate template of HTML again and again. Using the template inheritance concept, we just need to write the boilerplate only once, which acts as a parent template. Then we can use Django blocks, and while creating each page, we only need to write the contents of our <body> tag. Interesting, isn't it?</p>
+
+        <p>If we want to create a page, say a page for team members,  the HTML will be the same and just the information will change. If we are using traditional HTML and CSS, we have to write the HTML again and again for each team member. In this case, we can use context in Django. Context is defined in dictionaries, and each team member will have a distinct dictionary but the same headings. Then we can map the content into HTML using Django blocks. In this way, we only need to write the HTML once, and if any team member gets added, we can add another dictionary containing their information in the Views directory. In this way, context can be used for those areas in which the HTML is the same for each piece of information.</p>
+
+        <h4>5. Database Administration and Authentication</h4>
+        <p>One of the major advantages of using Django is that it comes with a built-in SQLite database for creating projects. As said earlier, for each form, we can configure it in the Models and Views directories, and when a user fills out the form, the data will be stored in the database. This database is also called Django Admin. In Django admin, we can assign users and see the information of forms filled by the users. Additionally, we can use authentication, where we need the users to login to the website and write all the necessary logic. Authentication is very simple in Django as compared to JavaScript.</p>
+
+        <h4>6. Object Relational Mapping</h4>
+        <p>If we need to access any particular information in the database, we need to visit each response to check the required information. This can be time-consuming if there are a large number of people who have filled out the form. In this case, ORM comes into the picture. We can filter out or find the necessary information using the shell with just a single command instead of extensively searching it into the database.</p>
+
+        <h4>7. Integration with React</h4>
+        <p>Since getting into Django, I have never really needed to use any kind of JavaScript snippet. But as a former React developer who used React as his main tech stack in every single project, I was curious to know if Django could be integrated into React. And yes, there were tutorials on how to integrate both of them. Inside the template directory, we can use our React App, which makes it easier to create components, something Django doesn't have. I was never really required to create components in Django, but in the future, I'll be looking forward to working with both of them together.</p>
+
+        <h4>8. Deployment of ML Models</h4>
+        <p>Perhaps the main reason why I switched to Django from the MERN stack is that Django provides an option for deploying machine learning models. Working with AI and having worked with web development before, I wanted to create a fusion of both for my upcoming projects. Even in one of my internships, there was an optional task to create a prototype of our AI models for small and medium businesses. Since then, I have decided to start learning and working with Django. The ML model that provides the best result can be stored in the Pickle module of Python (there are several other libraries too for storing ML models), and it can be imported into our Django application, and out of that, we can create a web application out of the model.</p>
+        <br><br>
+
+        <p>In short, switching to Django has been one of the best decisions since I never really understood the workings of NodeJS apart from URLs. The JS snippets are very complicated, and there are high chances of me getting errors in every single line of code. I found backend development really tough compared to many people. At that point, I decided to continue working with AI since I could do nothing significant in web apart from frontend. After building a strong foundation in Python through AI, I decided to continue with backend development again, but this time with Django. After learning it, I understood the concepts really well, and now even I find backend development very easy.</p>
+
+        <p>Overall, I would say that you do not need to learn every language or framework. Choose your field wisely, and then decide your tech stacks. In my case, learning MERN would mean learning extra technologies, so I chose Django since it is built in Python and I can work on both web development and AI using a single framework. Like me, if you're choosing AI or ML as your main career but want a side of web development, I would highly recommend you use Django or Flask as your backend, and you need not waste time learning MERN Stack.</p>
+
+        <p>That's all I learned about Django. Although there are some more things to learn, all the above points helped me develop a strong base in Django and backend development, and I can at least build the applications required for my projects.</p>
+    </div>   
+
+</div>
