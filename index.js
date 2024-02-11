@@ -117,6 +117,10 @@ app.get("/:slug", (req, res) => {
     res.render("partials/internshipscam", {
       style: 'blogs.css'
     });
+  } else if (slug === "journey-into-django") {
+    res.render("partials/djangoJourney", {
+      style: 'blogs.css'
+    });  
   } else {
     res.status(404).send("Blog not found");
   }
