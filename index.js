@@ -120,7 +120,11 @@ app.get("/:slug", (req, res) => {
   } else if (slug === "journey-into-django") {
     res.render("partials/djangoJourney", {
       style: 'blogs.css'
-    });  
+    });
+  } else if (slug === "end-of-an-era") {
+    res.render("partials/endOfAnEra", {
+      style: 'blogs.css'
+    });   
   } else {
     res.status(404).send("Blog not found");
   }
