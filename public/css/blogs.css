@@ -21,6 +21,7 @@ hr {
 
 p {
     font-size: 18px;
+    text-align: justify;
 }
 
 ul, ol {
