@@ -124,7 +124,11 @@ app.get("/:slug", (req, res) => {
   } else if (slug === "end-of-an-era") {
     res.render("partials/endOfAnEra", {
       style: 'blogs.css'
-    });   
+    });
+  } else if (slug === "the-truth-behind-ai-engineer-role") {
+    res.render("partials/AIEngineer", {
+      style: 'blogs.css'
+    });  
   } else {
     res.status(404).send("Blog not found");
   }
