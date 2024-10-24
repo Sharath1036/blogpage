@@ -128,7 +128,11 @@ app.get("/:slug", (req, res) => {
   } else if (slug === "the-truth-behind-ai-engineer-role") {
     res.render("partials/AIEngineer", {
       style: 'blogs.css'
-    });  
+    }); 
+  } else if (slug === "is-masters-in-data-science-in-india-worth-it") {
+    res.render("partials/Masters_DS", {
+      style: 'blogs.css'
+    });    
   } else {
     res.status(404).send("Blog not found");
   }
