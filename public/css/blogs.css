@@ -34,6 +34,7 @@ ul, ol {
 
 ol li, ul li {
     font-size: 18px;
+    text-align: justify;
 }
 
 pre, code {
