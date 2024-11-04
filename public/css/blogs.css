@@ -24,15 +24,15 @@ p {
     text-align: justify;
 }
 
-.text-indent {
+/* .text-indent {
     text-indent: 25px;
-}
+} */
 
 ul, ol {
     padding-left: 0;
 }
 
-ol li {
+ol li, ul li {
     font-size: 18px;
 }
 

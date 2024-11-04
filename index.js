@@ -132,7 +132,11 @@ app.get("/:slug", (req, res) => {
   } else if (slug === "is-masters-in-data-science-in-india-worth-it") {
     res.render("partials/Masters_DS", {
       style: 'blogs.css'
-    });    
+    });
+  } else if (slug === "journey-from-ece-to-ai-engineering") {
+    res.render("partials/ece_to_ai", {
+      style: 'blogs.css'
+    });     
   } else {
     res.status(404).send("Blog not found");
   }

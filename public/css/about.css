@@ -2,7 +2,7 @@
     overflow: hidden;
 }
 
-p {
+p, li {
     font-size: 21px;
     color: grey;
 }
