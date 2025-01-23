@@ -136,6 +136,10 @@ app.get("/:slug", (req, res) => {
   } else if (slug === "journey-from-ece-to-ai-engineering") {
     res.render("partials/ece_to_ai", {
       style: 'blogs.css'
+    });
+  } else if (slug === "2024-unwrapped") {
+    res.render("partials/2024unwrapped", {
+      style: 'blogs.css'
     });     
   } else {
     res.status(404).send("Blog not found");
