@@ -60,6 +60,13 @@ app.get('/professional', (req,res) => {
   });
 });
 
+app.get('/bookshelf', (req,res) => {
+  res.render('bookshelf', {
+    title: 'Bookshelf',  
+    style: 'home.css'
+  });
+});
+
 
 // Slugs for blogs
 app.get("/:slug", (req, res) => {
@@ -139,6 +146,10 @@ app.get("/:slug", (req, res) => {
     });
   } else if (slug === "2024-unwrapped") {
     res.render("partials/2024unwrapped", {
+      style: 'blogs.css'
+    });
+  } else if (slug === "i-came-upon-a-lighthouse") {
+    res.render("partials/i_came_upon_a_lighthouse", {
       style: 'blogs.css'
     });     
   } else {
