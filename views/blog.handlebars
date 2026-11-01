@@ -1,0 +1,43 @@
+<div class="container">
+{{#if isAdmin}}
+<div class="admin-bar d-flex flex-wrap align-items-center justify-content-between p-2 mb-3">
+  <span class="text-white small">
+    {{#if (eq blog.status "deleted")}}<strong class="text-danger">DELETED</strong> · hidden from visitors · {{/if}}
+    {{blog.wordCount}} words
+  </span>
+  <span class="d-flex">
+    <a class="btn btn-sm btn-outline-light mr-2" href="/admin/blogs/{{blog._id}}/edit">Edit</a>
+    {{#if (eq blog.status "deleted")}}
+    <form method="post" action="/admin/blogs/{{blog._id}}/restore"><button class="btn btn-sm btn-outline-success">Restore</button></form>
+    {{else}}
+    <form method="post" action="/admin/blogs/{{blog._id}}/delete" onsubmit="return confirm('Delete this blog? It will be hidden from the site but kept in the database.');">
+      <button class="btn btn-sm btn-outline-danger">Delete</button>
+    </form>
+    {{/if}}
+  </span>
+</div>
+<style>.admin-bar{border:1px dashed #ffc107;border-radius:6px}</style>
+{{/if}}
+<div class="h6 pt-3"><a href="{{categoryPath blog.category}}" class="font-weight-normal">{{categoryLabel blog.category}}</a></div>
+<div class="h1 text-white" style="display:inline-block;">{{blog.title}}</div>
+<br><br><hr>
+<div class="card bg-transparent border-0">
+    <div class="d-flex flex-row card-body">
+        <div class="blog">
+            <img class="rounded-circle" src="/sharath.png" height="50" width="50">
+        </div>
+        <div class="pl-3 position-relative">
+            <h6>SHARATH PAI</h6>
+            <h6 class="text-muted font-weight-normal">{{formatDate blog.publishedAt}} · {{blog.readTime}} MIN READ</h6>
+        </div>
+    </div>
+</div>
+<br>
+{{#if blog.coverImage}}
+<img class="card-img-top mx-auto d-block blogimg" src="{{imgSrc blog.coverImage}}" alt="{{blog.title}}"/>
+<br><br>
+{{/if}}
+<div class="blog-content">
+{{{blog.contentHtml}}}
+</div>
+</div>

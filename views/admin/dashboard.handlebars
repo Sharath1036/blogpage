@@ -1,0 +1,50 @@
+<div class="container admin">
+  <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+    <div class="h2 text-white mb-2">Dashboard</div>
+    <div class="d-flex">
+      <a class="btn btn-light mr-2" href="/admin/blogs/new">+ New blog</a>
+      <form method="post" action="/admin/logout"><button class="btn btn-outline-light">Log out</button></form>
+    </div>
+  </div>
+
+  {{#if flash}}<div class="alert alert-info">{{flash}}</div>{{/if}}
+
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item"><a class="nav-link {{#unless showDeleted}}active{{/unless}}" href="/admin">Published ({{publishedCount}})</a></li>
+    <li class="nav-item"><a class="nav-link {{#if showDeleted}}active{{/if}}" href="/admin?show=deleted">Deleted ({{deletedCount}})</a></li>
+  </ul>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover admin-table">
+      <thead>
+        <tr><th>Title</th><th>Section</th><th>Date</th><th>Read</th><th class="text-right">Actions</th></tr>
+      </thead>
+      <tbody>
+        {{#each blogs}}
+        <tr>
+          <td>
+            <a class="text-white" href="/{{slug}}">{{title}}</a>
+            {{#if featured}}<span class="badge badge-warning ml-1">Featured</span>{{/if}}
+            <div class="small text-muted">/{{slug}}</div>
+          </td>
+          <td>{{categoryTitle}}</td>
+          <td class="text-nowrap">{{formatDate publishedAt}}</td>
+          <td class="text-nowrap">{{readTime}} min · {{wordCount}} w</td>
+          <td class="text-right text-nowrap">
+            <a class="btn btn-sm btn-outline-light" href="/admin/blogs/{{_id}}/edit">Edit</a>
+            {{#if (eq status "deleted")}}
+            <form class="d-inline" method="post" action="/admin/blogs/{{_id}}/restore"><button class="btn btn-sm btn-outline-success">Restore</button></form>
+            {{else}}
+            <form class="d-inline" method="post" action="/admin/blogs/{{_id}}/delete" onsubmit="return confirm('Delete this blog? It will be hidden from the site but kept in the database.');">
+              <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+            {{/if}}
+          </td>
+        </tr>
+        {{else}}
+        <tr><td colspan="5" class="text-center text-muted">Nothing here.</td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
