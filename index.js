@@ -1,163 +1,80 @@
+require('dotenv').config();
+
 const express = require('express');
-const app = express();
 const path = require('path');
 const { engine } = require('express-handlebars');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const cookieParser = require('cookie-parser');
+
+const { connectDB } = require('./lib/db');
+const { loadAdmin } = require('./lib/auth');
+const { CATEGORIES } = require('./lib/categories');
+const adminRoutes = require('./routes/admin');
+const publicRoutes = require('./routes/public');
+
+const app = express();
+app.set('trust proxy', 1);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'images')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, limit: '2mb' }));
+app.use(cookieParser());
 
-app.engine('handlebars', engine({
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+app.engine(
+  'handlebars',
+  engine({
     defaultLayout: 'main',
-}));
+    helpers: {
+      // 8 MAR 2025
+      formatDate: (d) => {
+        if (!d) return '';
+        const date = new Date(d);
+        return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+      },
+      categoryLabel: (key) => (CATEGORIES[key] ? CATEGORIES[key].label : key),
+      categoryPath: (key) => (CATEGORIES[key] ? CATEGORIES[key].path : '/'),
+      // Image paths: absolute URLs and /paths pass through; bare filenames are served from /images.
+      imgSrc: (src) => {
+        if (!src) return '/blogLogo.png';
+        return /^(https?:)?\/\//i.test(src) || src.startsWith('/') ? src : '/' + src;
+      },
+      eq: (a, b) => a === b,
+      year: () => new Date().getFullYear(),
+    },
+  })
+);
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
-app.set('view engine', '.handlebars');
-app.set('views', path.join(__dirname, './views'))
+app.use(loadAdmin);
 
-app.get('/', (req,res) => {
-    res.render('home', {
-        title: 'Sharath\'s Blogspot',
-        style: 'home.css'
-    });
-});
+// Static (non-DB) pages.
+app.get('/about', (req, res) => res.render('about', { title: 'About', style: 'about.css' }));
+app.get('/socials', (req, res) => res.render('socials', { title: 'Socials', style: 'about.css' }));
 
-app.get('/about', (req,res) => {
-    res.render('about', {
-        title: 'About',  
-        style: 'about.css'
-    });
-});
-
-app.get('/socials', (req,res) => {
-  res.render('socials', {
-      title: 'Socials',  
-      style: 'about.css'
-  });
-});
-
-
-// Routing for sections
-app.get('/life', (req,res) => {
-  res.render('life', {
-    title: 'Life',  
-    style: 'home.css'
-  });
-});
-
-app.get('/cs', (req,res) => {
-  res.render('cs', {
-    title: 'Computer Science',  
-    style: 'home.css'
-  });
-});
-
-app.get('/professional', (req,res) => {
-  res.render('professional', {
-    title: 'Professional',  
-    style: 'home.css'
-  });
-});
-
-app.get('/bookshelf', (req,res) => {
-  res.render('bookshelf', {
-    title: 'Bookshelf',  
-    style: 'home.css'
-  });
-});
-
-
-// Slugs for blogs
-app.get("/:slug", (req, res) => {
-  const slug = req.params.slug;
-
-  if (slug === "dealing-with-a-stranger") {
-    res.render("partials/stranger", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "organize-your-linkedin") {
-    res.render("partials/orglinkedin", {
-      style: 'blogs.css'
-    });  
-  } else if (slug === "reactjs-guide") {
-    res.render("partials/reactjs", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "artificial-intelligence-roadmap") {
-    res.render("partials/airoadmap", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "from-a-community-to-a-startup") {
-    res.render("partials/community", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "things-i-let-go-off-in-2023") {
-    res.render("partials/letgo", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "effective-resume-tips-for-software-engineers") {
-    res.render("partials/resume", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "best-data-science-youtuber") {
-    res.render("partials/bestdsyt", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "wish-i-had-this-college-life") {
-    res.render("partials/wishIHad", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "first-stadium-game-experience") {
-    res.render("partials/firststadium", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "deleting-past-github-commits") {
-    res.render("partials/deletecommits", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "2023-unwrapped") {
-    res.render("partials/2023unwrapped", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "internship-scam") {
-    res.render("partials/internshipscam", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "journey-into-django") {
-    res.render("partials/djangoJourney", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "end-of-an-era") {
-    res.render("partials/endOfAnEra", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "the-truth-behind-ai-engineer-role") {
-    res.render("partials/AIEngineer", {
-      style: 'blogs.css'
-    }); 
-  } else if (slug === "is-masters-in-data-science-in-india-worth-it") {
-    res.render("partials/Masters_DS", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "journey-from-ece-to-ai-engineering") {
-    res.render("partials/ece_to_ai", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "2024-unwrapped") {
-    res.render("partials/2024unwrapped", {
-      style: 'blogs.css'
-    });
-  } else if (slug === "i-came-upon-a-lighthouse") {
-    res.render("partials/i_came_upon_a_lighthouse", {
-      style: 'blogs.css'
-    });     
-  } else {
-    res.status(404).send("Blog not found");
+// Everything below needs MongoDB.
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('MongoDB connection failed:', err.message);
+    res.status(503).send('Database unavailable. Please try again shortly.');
   }
-}); 
-
-app.listen(8080, () =>{
-  console.log("Server running on port http://localhost:8080");
-  console.log("Server running on your network http://192.168.1.4:8080");
 });
+
+app.use('/admin', adminRoutes); // must come before the /:slug catch-all
+app.use('/', publicRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send('Something went wrong.');
+});
+
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+}
+
+module.exports = app;

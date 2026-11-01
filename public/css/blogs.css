@@ -49,3 +49,21 @@ mark {
     height: 500px;
     object-fit: cover;
 }
+
+/* Content generated from the admin editor */
+.blog-content h2, .blog-content h3 {
+    color: rgb(189, 189, 189);
+    margin-top: 1.5rem;
+}
+
+.blog-content blockquote {
+    border-left: 3px solid #666;
+    padding-left: 12px;
+    font-style: italic;
+}
+
+.blog-content pre {
+    background: #1e1f1f;
+    padding: 12px;
+    border-radius: 4px;
+}

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3"><img class="mx-auto d-block rounded-circle" src="sharath.png" height="250" width="250"></div>
+    <div class="col-lg-3"><img class="mx-auto d-block rounded-circle" src="/sharath.png" height="250" width="250"></div>
     <div class="col-lg-9 mt-3">
       <h1>Hi, I'm Sharath.</h1>
       <p style="font-size: 21px;">Namaste! You'll find me here noting down on what I'm learning and sharing my journey. If you read anything here and have feedback, corrections or thoughts, I'd love to hear from you.</p>
@@ -9,9 +9,34 @@
   </div>
   <hr/>
 </div>
-    
-<div class="container">{{> blogData}}</div>
 
+<div class="container">
+  {{#if featured}}
+  {{! Featured blog }}
+  <div class="row" id="latest">
+    <div class="col-lg-12 card border-0 bg-transparent mt-3">
+      <img class="card-img-top mx-auto d-block blogimg" src="{{imgSrc featured.coverImage}}" alt="{{featured.title}}"
+        style="object-fit:cover;" />
+      <div class="card-body text-left p-0">
+        <div class="h6 pt-3"><a href="{{categoryPath featured.category}}" class="font-weight-normal">{{categoryLabel featured.category}}</a></div>
+        <div class="card-title h4 text-white" style="display:inline-block;">{{featured.title}}<img class="pb-2" src="/new.png" style="height:50px;"></div>
+        <div class="card-text">
+          <p style="font-size: 18px;">{{featured.excerpt}}</p>
+        </div>
+        <div class="text-center"><a class="text-white" href="/{{featured.slug}}"><button
+              type="button" class="btn w-100 mb-4 btn-outline-light">READ FULL BLOG</button></a></div>
+      </div>
+    </div>
+  </div>
+  <hr>
 
-  
- 
+  {{! Other blogs }}
+  <div class="row">
+    {{#each blogs}}
+      {{> blogCard}}
+    {{/each}}
+  </div>
+  {{else}}
+  <p class="text-center mt-5">No blogs yet.</p>
+  {{/if}}
+</div>
