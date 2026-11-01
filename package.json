@@ -30,5 +30,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "overrides": {
+    "htmlparser2": "^8.0.2"
   }
 }
